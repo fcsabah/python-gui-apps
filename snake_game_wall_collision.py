@@ -2,31 +2,24 @@ import random
 
 import pygame
 
-# Initialize pygame
 pygame.init()
 
-# Screen dimensions
 WIDTH, HEIGHT = 800, 600
 
-# Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-# Snake block size
 BLOCK_SIZE = 20
 SNAKE_SPEED = 10
 
-# Initialize game window
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Snake Game")
 
-# Clock to control the game speed
 clock = pygame.time.Clock()
 
-# Font styles
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
 
@@ -48,7 +41,6 @@ def message(msg, color):
 
 def game_loop():
     game_over = False
-    game_close = False
 
     x1 = WIDTH / 2
     y1 = HEIGHT / 2
@@ -59,7 +51,6 @@ def game_loop():
     snake_list = []
     length_of_snake = 1
 
-    # Generate food position
     foodx = round(random.randrange(0, WIDTH - BLOCK_SIZE) / 20.0) * 20.0
     foody = round(random.randrange(0, HEIGHT - BLOCK_SIZE) / 20.0) * 20.0
 
@@ -82,7 +73,6 @@ def game_loop():
                     y1_change = BLOCK_SIZE
                     x1_change = 0
 
-        # Check for collision with walls
         if x1 >= WIDTH or x1 < 0 or y1 >= HEIGHT or y1 < 0:
             game_over = True
 
@@ -112,7 +102,7 @@ def game_loop():
         clock.tick(SNAKE_SPEED)
 
     screen.fill(BLACK)
-    message("You lost! Press Q-Quit or C-Play Again", RED)
+    message("Game Over! Press Q to Quit or C to Play Again", RED)
     your_score(length_of_snake - 1)
     pygame.display.update()
 
@@ -125,8 +115,6 @@ def game_loop():
                 if event.key == pygame.K_c:
                     game_loop()
 
-    # pygame.quit()
-    # quit()
 
 
 game_loop()
